@@ -1,4 +1,4 @@
-Practice Repo:
+Refer changelog.md file for branches and their corresponding features
 
 ```Branches```
 1. event-customEvent
