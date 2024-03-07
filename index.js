@@ -4,15 +4,13 @@
 3. rest 2 buttons are 2 fetch the data from the API
 */
 const worker = new Worker("./worker.js");
-const preElem = document.querySelector('#pre');
-const TODO_URL = 'https://jsonplaceholder.typicode.com/todos';
-const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
+const preElem = document.querySelector("#pre");
+const TODO_URL = "https://jsonplaceholder.typicode.com/todos";
+const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 
 const countSum = () => {
-  for (let i = 0; i < 10000000000; i++) {}
-  console.log("task finished");
   worker.postMessage("hey there");
-  // our main thread will 
+  // our main thread will
   worker.onmessage = (msg) => {
     alert("msg from worker", msg.data);
   };
@@ -25,17 +23,19 @@ const changeBg = () => {
 };
 
 const fetchTodos = () => {
-    worker.postMessage({actionType: 'FETCH', payload: TODO_URL});
-    worker.onmessage = (msg) => {
-        const {data} = msg;
-        preElem.textContent = JSON.stringify(data, null, 2);
-    }
-}
+  worker.postMessage({ actionType: "FETCH", payload: TODO_URL });
+  worker.onmessage = (msg) => {
+    const { data } = msg;
+    preElem.textContent = JSON.stringify(data, null, 2);
+  };
+  // this will terminate the current worker i.e other tasks won't be completed
+  worker.terminate();
+};
 
 const fetchPosts = () => {
-    worker.postMessage({actionType: 'FETCH', payload: POSTS_URL});
-    worker.onmessage = (msg) => {
-        const {data} = msg;
-        preElem.textContent = JSON.stringify(data, null, 2);
-    }
-}
+  worker.postMessage({ actionType: "FETCH", payload: POSTS_URL });
+  worker.onmessage = (msg) => {
+    const { data } = msg;
+    preElem.textContent = JSON.stringify(data, null, 2);
+  };
+};

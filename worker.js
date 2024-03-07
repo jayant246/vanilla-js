@@ -8,6 +8,8 @@
     - fetch API
     - navigator API
     - have their own thread, execution context and event loop
+6.  worker.terminate() -  this will terminate the current worker i.e other tasks won't be completed
+  
 */
 
 self.onmessage = (msg) => {
@@ -29,7 +31,7 @@ self.onmessage = (msg) => {
         sum += 1;
       }
 
-      postMessage(sum);
+      postMessage("sum");
     }
   }
 };
